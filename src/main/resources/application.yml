@@ -1,0 +1,33 @@
+properties:
+    emails:
+    - Artem.Krotov@eldorado.ru
+    #- Anton.Melnik@eldorado.ru
+    #- Aleksey.Demin@eldorado.ru
+    #- Aleksey.Kadeev@eldorado.ru
+    limit: 4
+    message: |+
+        "Внимание!
+
+        Запрос в базу вернул - %s
+
+        Тело запрос: %s
+
+    period: "*/15 * * * * *"
+    query: "select count(WONUM) from MAXIMO.workorder w where w.STATUS='ОТКРЫТ' and WOCLASS='РАБОЧЕЕЗАДАНИЕ' and w.statusdate > trunc((sysdate),'YY')"
+    sender: "servicedesk@eldorado.ru"
+    consoleMessage: "Количество полей в запросе = "
+    subject: "ITSD-76 Мониторинг работы эскалаций в.1"
+
+
+spring:
+    datasource:
+        password: 4Rgh90$
+        url: jdbc:oracle:thin:@racscan.co.vectis.local:1521/ctginst1
+        username: maximo_report
+    mail:
+        host: mail.eldorado.ru
+        password: ZAQ!xsw2
+        port: 25
+        protocol: smtp
+        username: servicedesk
+

@@ -1,0 +1,60 @@
+import java.nio.file.Files
+
+buildscript {
+    ext {
+        springBootVersion = '1.5.2.RELEASE'
+    }
+    repositories {
+        maven {
+            url 'http://10.0.7.10:8082/nexus/content/groups/public/'
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+apply plugin: 'application'
+
+mainClassName = "ru.eldorado.Main"
+
+jar {
+    baseName = 'monitoring-of-escalations'
+    version = '1.1.1'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+repositories {
+    maven {
+        url 'http://10.0.7.10:8082/nexus/content/groups/public/'
+    }
+}
+
+
+dependencies {
+    compile group: 'org.springframework', name: 'spring-core', version: '4.3.4.RELEASE'
+    compile "org.projectlombok:lombok:1.16.12"
+    compile "com.google.guava:guava:21.0"
+    compile "org.springframework.boot:spring-boot-starter-jdbc"
+    compile "org.springframework.boot:spring-boot-starter-mail:1.5.3.RELEASE"
+    compile "org.springframework.boot:spring-boot-configuration-processor"
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework:spring-jdbc:4.1.6.RELEASE"
+    compile "com.oracle:ojdbc6:11.2.0.3"
+
+}
+
+task filter << {
+
+    def src = new File("$project.projectDir/src/main/resources/application.yml")
+    def dest = new File("$project.buildDir/install/$archivesBaseName/bin/application.yml")
+    Files.copy(src.toPath(),dest.toPath())
+
+
+}
+
+installDist.finalizedBy filter

@@ -1,1 +1,1 @@
-# monitoring-of-escalations
+Проект использует Семантическое Версионирование http://semver.org/lang/ru/
