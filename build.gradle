@@ -22,7 +22,7 @@ mainClassName = "ru.eldorado.Main"
 
 jar {
     baseName = 'monitoring-of-escalations'
-    version = '1.1.1'
+    version = '1.1.2'
 }
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -50,10 +50,9 @@ dependencies {
 
 task filter << {
 
-    def src = new File("$project.projectDir/src/main/resources/application.yml")
+    def src = new File("$project.projectDir/src/main/java/ru/eldorado/conf/application.yml")
     def dest = new File("$project.buildDir/install/$archivesBaseName/bin/application.yml")
     Files.copy(src.toPath(),dest.toPath())
-
 
 }
 

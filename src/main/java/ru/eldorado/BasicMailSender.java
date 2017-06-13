@@ -35,10 +35,11 @@ public class BasicMailSender {
 
         Integer count = getCount();
 
-        System.out.println(LocalDateTime.now() + " " + properties.getConsoleMessage() + getCount());
-
         if (count > properties.getLimit()) {
+            System.out.println("Отправлено письмо. " + LocalDateTime.now() + " " + properties.getConsoleMessage() + getCount());
             sendMessage(count);
+        } else {
+            System.out.println(LocalDateTime.now() + " " + properties.getConsoleMessage() + getCount() + "/" + properties.getLimit());
         }
 
     }
